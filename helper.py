@@ -72,10 +72,10 @@ def save_image(img):
 def compute_similarities(image):
     #  loading model state
     model = CarRecognition()
-    model.load_state_dict(torch.load('dependacies/model_state100.pt', map_location=device))
+    model.load_state_dict(torch.load('app_files/model_state100.pt', map_location=device))
 
     #  loading image features
-    with open('dependacies/similarity_features.pkl', 'rb') as f:
+    with open('app_files/similarity_features.pkl', 'rb') as f:
         extracted_features = pickle.load(f)
 
     #  processing image
