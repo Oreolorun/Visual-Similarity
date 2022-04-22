@@ -104,6 +104,11 @@ def compute_similarities(image):
     recommendations = score_series.index[:4]
     recommendations = [os.path.join('images/similarity_images', f) for f in recommendations]
 
+    #  creating captions
+    labels = score_series.values[:4]
+    labels = [round(x*100) for x in labels]
+    labels = [f'similarity: {x}%' for x in labels]
+
     #  extracting  highest recommendation scores
     recommendation_check = score_series.values[0]
 
@@ -112,7 +117,7 @@ def compute_similarities(image):
 
     print(score_series.head(4))
 
-    return recommendations, recommendation_check
+    return recommendations, labels, recommendation_check
 
 
 def output(uploaded):
@@ -127,7 +132,7 @@ def output(uploaded):
         st.image('image.jpg', width=365)
 
         #  derive recommendation
-        recommended, check = compute_similarities(image='image.jpg')
+        recommended, captions, check = compute_similarities(image='image.jpg')
 
         #  feedback
         st.write('#### Output:')
@@ -151,13 +156,13 @@ def output(uploaded):
                 #  feedback
                 st.success('Here are the most likely images...')
                 #  displaying likely images
-                st.image(recommended, width=300)
+                st.image(recommended, caption=captions, width=300)
 
         else:
             #  feedback
             st.success('Here are some similar images...')
             #  displaying similar images
-            st.image(recommended, width=300)
+            st.image(recommended, caption=captions, width=300)
 
     except AttributeError:
         #  handle exception
