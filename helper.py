@@ -162,6 +162,7 @@ def output(uploaded):
             #  feedback
             st.success('Here are some similar images...')
             #  displaying similar images
+            st.write(captions[0])
             st.image(recommended, caption=captions, width=300)
 
     except AttributeError:
