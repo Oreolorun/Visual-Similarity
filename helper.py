@@ -160,7 +160,7 @@ def output(uploaded):
 
         else:
             #  feedback
-            st.success('Here are the most similar images in storage....')
+            st.success('Here are the most similar images in storage...')
             #  displaying similar images
             st.image(recommended, caption=captions, width=300)
 
